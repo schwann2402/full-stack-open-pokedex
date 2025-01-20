@@ -25,7 +25,7 @@ jobs:
       - name: Run tests
         run: npm run test
   tag_release:
-    needs: simple_deployment_pipeline
+    needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'push' }}
     steps:
