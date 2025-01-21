@@ -12,7 +12,7 @@ jobs:
   deploy:
     name: Deploy app
     runs-on: ubuntu-latest
-    concurrency: deploy-group    # optional: ensure only one action runs at a time
+    concurrency: deploy-group # optional: ensure only one action runs at a time
     if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v4
@@ -20,3 +20,10 @@ jobs:
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: Notify-Discord Successful Deployment
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          severity: info
+          details: Test Succeded!
