@@ -20,10 +20,13 @@ jobs:
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      - name: Notify-Discord Successful Deployment
-        uses: rjstone/discord-webhook-notify@v1
+      - name: Successfull deplloyment
         if: ${{ success() }}
+        uses: rjstone/discord-webhook-notify@v1
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          severity: info
-          details: Test Succeded!
+            severity: info
+            username: Discord Bot Notification
+            color: 'blue'
+            description: Trying to see if it works
+            details: 'Hope it works'
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
