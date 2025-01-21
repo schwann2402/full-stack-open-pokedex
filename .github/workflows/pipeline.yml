@@ -25,12 +25,12 @@ jobs:
       - name: Run tests
         run: npm run test
       - name: Github Notify Failed build
-        uses: rjstone/discord-webhook-notify@v1.0.0
+        uses: hunghg255/action-notifications@master
         if: failure()
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          severity: error
-          details: Build failed!
+          discord_webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: 'Failed build'
+          description: "This is a discord webhook"
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
