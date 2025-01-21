@@ -21,12 +21,9 @@ jobs:
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       - name: Successfull deployment
-        if: ${{ failure() }}
-        uses: rjstone/discord-webhook-notify@v1.0.0
+        if: success()
+        uses: hunghg255/action-notifications@master
         with:
-            severity: info
-            username: Discord Bot Notification
-            color: 'blue'
-            description: Trying to see if it works
-            details: 'Hope it works'
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          discord_webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: 'Successfull deployment'
+          description: "This is a discord webhook"
